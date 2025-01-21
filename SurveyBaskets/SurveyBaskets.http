@@ -1,0 +1,6 @@
+@SurveyBaskets_HostAddress = http://localhost:5027
+
+GET {{SurveyBaskets_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
