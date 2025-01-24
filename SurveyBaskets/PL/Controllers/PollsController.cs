@@ -1,4 +1,6 @@
 ﻿
+using SurveyBackets.BLL.Services;
+
 namespace SurveyBackets.PL.Controler
 {
     [Route("api/[controller]")]
@@ -7,7 +9,7 @@ namespace SurveyBackets.PL.Controler
     {
         private readonly IPollServices _pollServices = pollServices;
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll() 
         {
             var poll= _pollServices.GetAll();
             return poll is null ? NoContent() : Ok(poll);
@@ -27,6 +29,24 @@ namespace SurveyBackets.PL.Controler
         {
             var poll = _pollServices.AddNew(pool);
             return poll is null ? NoContent() : Created();
+        }
+        [HttpPut("{id}")]
+        public IActionResult Update(int id,Poll pool)
+        {
+            var result =_pollServices.Update(id, pool);
+            if(!result)
+            {
+                return NotFound();
+            }
+            return NoContent(); 
+        }
+        [HttpDelete("Delete{id}")]
+        public IActionResult Delete(int id)
+        {
+            var result=_pollServices.Delete(id);
+            if(!result)
+                return NotFound();
+            return Ok();
         }
     }
 }

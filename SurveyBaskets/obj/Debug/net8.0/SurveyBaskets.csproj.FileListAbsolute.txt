@@ -30,3 +30,4 @@ C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\re
 C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\SurveyBaskets.pdb
 C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\SurveyBaskets.genruntimeconfig.cache
 C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\ref\SurveyBaskets.dll
+C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\SurveyBaskets.sourcelink.json

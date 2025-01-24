@@ -1,13 +1,15 @@
-﻿using SurveyBackets.BLL.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using SurveyBackets.BLL.Services.Interfaces;
 
 namespace SurveyBackets.BLL.Services
 {
     public class PollServices : IPollServices
     {
+        static int id = 0;
         readonly static public List<Poll> polls = [
         new Poll
         {
-            ID = 1,
+            ID =id,
             Description = "ay kalam",
             Name = "hazem"
         }];
@@ -18,10 +20,36 @@ namespace SurveyBackets.BLL.Services
 
         public Poll? AddNew(Poll pool)
         {
+            pool.ID = id;
             polls.Add(pool);
+            id++;
             return (pool);
         }
 
-        
+        public bool Update(int id, Poll poll)
+        {
+            var po=getById(id);
+            if(po is null)
+                return false;
+            else {
+                po.Description = poll.Description;
+                po.Name = poll.Name;
+                return true;
+                
+            }
+        }
+
+        public bool Delete(int id)
+        {
+            
+            var result=getById(id);
+            if (result is null)
+                return false;
+            else
+            {
+                polls.Remove(result);
+                return true;
+            }
+        }
     }
 }
