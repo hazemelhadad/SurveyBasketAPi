@@ -31,3 +31,6 @@ C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\Su
 C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\SurveyBaskets.genruntimeconfig.cache
 C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\ref\SurveyBaskets.dll
 C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\obj\Debug\net8.0\SurveyBaskets.sourcelink.json
+C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\bin\Debug\net8.0\Mapster.dll
+C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\bin\Debug\net8.0\Mapster.Core.dll
+C:\Users\lenovo loq\source\repos\SurveyBaskets\SurveyBaskets\bin\Debug\net8.0\Mapster.DependencyInjection.dll

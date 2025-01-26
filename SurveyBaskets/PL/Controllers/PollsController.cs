@@ -1,5 +1,9 @@
 ﻿
-using SurveyBackets.BLL.Services;
+
+
+
+
+using SurveyBaskets.BLL.Contracts.Requests;
 
 namespace SurveyBackets.PL.Controler
 {
@@ -12,7 +16,8 @@ namespace SurveyBackets.PL.Controler
         public IActionResult GetAll() 
         {
             var poll= _pollServices.GetAll();
-            return poll is null ? NoContent() : Ok(poll);
+            var polls=poll.Adapt<IEnumerable<PollResponse>>();
+            return poll is null ? NoContent() : Ok(polls);
             
         }
         [HttpGet("getById/{id}")]
@@ -20,14 +25,16 @@ namespace SurveyBackets.PL.Controler
         public IActionResult getById(int id)
         {
            var poll=pollServices.getById(id);
-            return poll is null ? NoContent() : Ok(poll);
+            
+            return poll is null ? NoContent() : Ok(poll.Adapt<PollResponse>());
 
 
         }
         [HttpPost("Add")]
-        public IActionResult add(Poll pool)
+        public IActionResult add(CreatePollRequest? poll)
         {
-            var poll = _pollServices.AddNew(pool);
+            var map = poll.Adapt<Poll>();
+            var x = _pollServices.AddNew(map);
             return poll is null ? NoContent() : Created();
         }
         [HttpPut("{id}")]
