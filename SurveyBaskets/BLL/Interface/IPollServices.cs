@@ -2,10 +2,11 @@
 {
     public interface IPollServices
     {
-        public IEnumerable<Poll> GetAll();
-        public Poll? getById(int id);
-        public Poll? AddNew(Poll pool);
-        public bool Update(int id,Poll poll);
-        public bool Delete(int id);
+        Task <IEnumerable<Poll>> GetAllAsync();
+        Task <Poll?> getByIdAsync(int id);
+        Task <Poll?> AddNewAsync(Poll pool);
+        Task <bool> UpdateAsync(int id, Poll poll);
+        //public bool Delete(int id);
     }
 }
+ 

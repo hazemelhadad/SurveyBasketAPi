@@ -13,47 +13,48 @@ namespace SurveyBackets.PL.Controler
     {
         private readonly IPollServices _pollServices = pollServices;
         [HttpGet]
-        public IActionResult GetAll() 
+        public async Task<IActionResult> GetAll()
         {
-            var poll= _pollServices.GetAll();
-            var polls=poll.Adapt<IEnumerable<PollResponse>>();
+            var poll = await _pollServices.GetAllAsync();
+            var polls = poll.Adapt<IEnumerable<PollResponse>>();
             return poll is null ? NoContent() : Ok(polls);
-            
+
         }
         [HttpGet("getById/{id}")]
-        
-        public IActionResult getById(int id)
+
+        public async Task<IActionResult> getById(int id)
         {
-           var poll=pollServices.getById(id);
-            
+            var poll = await pollServices.getByIdAsync(id);
+
             return poll is null ? NoContent() : Ok(poll.Adapt<PollResponse>());
 
 
         }
         [HttpPost("Add")]
-        public IActionResult add(CreatePollRequest? poll)
+        public async Task<IActionResult> add(CreatePollRequest? poll)
         {
             var map = poll.Adapt<Poll>();
-            var x = _pollServices.AddNew(map);
+            var x =await _pollServices.AddNewAsync(map);
             return poll is null ? NoContent() : Created();
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int id,Poll pool)
+        public async Task<IActionResult> Update(int id, Poll pool)
         {
-            var result =_pollServices.Update(id, pool);
-            if(!result)
+            var result = await _pollServices.UpdateAsync(id, pool);
+            if (!result)
             {
                 return NotFound();
             }
-            return NoContent(); 
+            return NoContent();
         }
-        [HttpDelete("Delete{id}")]
-        public IActionResult Delete(int id)
-        {
-            var result=_pollServices.Delete(id);
-            if(!result)
-                return NotFound();
-            return Ok();
-        }
+        //    [HttpDelete("Delete{id}")]
+        //    public IActionResult Delete(int id)
+        //    {
+        //        var result=_pollServices.Delete(id);
+        //        if(!result)
+        //            return NotFound();
+        //        return Ok();
+        //    }
+        //}
     }
 }

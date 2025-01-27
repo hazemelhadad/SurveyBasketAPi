@@ -1,6 +1,6 @@
 
 using MapsterMapper;
-using SurveyBackets.BLL.Services;
+using SurveyBaskets.DAL.Persistence;
 using System.Reflection;
 
 namespace SurveyBaskets
@@ -22,7 +22,10 @@ namespace SurveyBaskets
             var mapConfig = TypeAdapterConfig.GlobalSettings;
             mapConfig.Scan(Assembly.GetExecutingAssembly());
             builder.Services.AddSingleton<IMapper>(new Mapper(mapConfig));
-            //
+
+            //add database and DB Context Configurations
+            var connection=builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<ApplicationDBContext>(options=>options.UseSqlServer(connection));
             builder.Services.AddScoped<IPollServices, PollServices>();
 
             var app = builder.Build();
