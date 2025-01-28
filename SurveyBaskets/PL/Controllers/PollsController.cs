@@ -1,10 +1,5 @@
 ﻿
 
-
-
-
-using SurveyBaskets.BLL.Contracts.Requests;
-
 namespace SurveyBackets.PL.Controler
 {
     [Route("api/[controller]")]
@@ -31,30 +26,30 @@ namespace SurveyBackets.PL.Controler
 
         }
         [HttpPost("Add")]
-        public async Task<IActionResult> add(CreatePollRequest? poll)
+        public async Task<IActionResult> add(PollRequest? poll,CancellationToken cancellationToken)
         {
             var map = poll.Adapt<Poll>();
-            var x =await _pollServices.AddNewAsync(map);
+            var x =await _pollServices.AddNewAsync(map,cancellationToken);
             return poll is null ? NoContent() : Created();
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Poll pool)
+        public async Task<IActionResult> Update(int id, Poll pool,CancellationToken cancellationToken)
         {
-            var result = await _pollServices.UpdateAsync(id, pool);
+            var result = await _pollServices.UpdateAsync(id, pool,cancellationToken);
             if (!result)
             {
                 return NotFound();
             }
             return NoContent();
         }
-        //    [HttpDelete("Delete{id}")]
-        //    public IActionResult Delete(int id)
-        //    {
-        //        var result=_pollServices.Delete(id);
-        //        if(!result)
-        //            return NotFound();
-        //        return Ok();
-        //    }
-        //}
+        [HttpDelete("Delete{id}")]
+        public async Task<IActionResult> Delete(int id ,CancellationToken cancellationToken)
+        {
+            var result =await _pollServices.DeleteAsync(id,cancellationToken);
+            if (!result)
+                return NotFound();
+            return Ok();
+        }
     }
 }
+

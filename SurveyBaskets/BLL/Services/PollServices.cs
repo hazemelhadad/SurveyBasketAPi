@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using SurveyBackets.BLL.Services.Interfaces;
+﻿
 using SurveyBaskets.DAL.Persistence;
 
 namespace SurveyBackets.BLL.Services
@@ -12,43 +11,49 @@ namespace SurveyBackets.BLL.Services
         public async Task<IEnumerable<Poll>> GetAllAsync() =>
             await db.polls.AsNoTracking().ToListAsync();
 
-        public async Task<Poll?> getByIdAsync(int id) =>
-            await db.polls.FindAsync(id);
+        public async Task<Poll?> getByIdAsync(int id,CancellationToken cancellationToken) =>
+            await db.polls.FindAsync(id,cancellationToken);
             
 
-        public async Task<Poll?> AddNewAsync(Poll pool)
+        public async Task<Poll?> AddNewAsync(Poll pool,CancellationToken cancellationToken=default)
         {
-            var x= await db.polls.AddAsync(pool);
-            await db.SaveChangesAsync();
+            var x= await db.polls.AddAsync(pool,cancellationToken);
+            await db.SaveChangesAsync(cancellationToken);
             return (pool);
         }
 
-        public async Task<bool> UpdateAsync(int id, Poll poll)
+        public async Task<bool> UpdateAsync(int id, Poll poll, CancellationToken cancellationToken=default)
         {
-            var po = await getByIdAsync(id);
+            var po = await getByIdAsync(id,cancellationToken);
             if (po is null)
                 return false;
             else
             {
-                po.Summary = poll.Summary;
                 po.Title = poll.Title;
+                po.Summary = poll.Summary;
+                po.IsPublished = poll.IsPublished;
+                po.StartsAt = poll.StartsAt;    
+                po.EndsAt = poll.EndsAt;
+                await db.SaveChangesAsync(cancellationToken);
+
                 return true;
 
             }
         }
 
-        //    public bool Delete(int id)
-        //    {
+        public async Task <bool> DeleteAsync(int id,CancellationToken cancellationToken)
+        {
 
-        //        var result=getById(id);
-        //        if (result is null)
-        //            return false;
-        //        else
-        //        {
-        //            polls.Remove(result);
-        //            return true;
-        //        }
-        //    }
-        //}
+            var result = await getByIdAsync(id,cancellationToken);
+            if (result is null)
+                return false;
+            else
+            {
+                db.Remove(result);
+                await db.SaveChangesAsync(cancellationToken);
+                return true;
+            }
+        }
     }
 }
+
