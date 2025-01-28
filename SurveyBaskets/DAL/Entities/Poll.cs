@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 
-namespace SurveyBackets.DAL.Domains
+namespace SurveyBackets.DAL.Entities
 {
     public sealed class Poll
     {

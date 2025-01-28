@@ -1,5 +1,7 @@
 ﻿
 
+using SurveyBaskets.BLL.Contracts.Polls;
+
 namespace SurveyBackets.PL.Controler
 {
     [Route("api/[controller]")]
@@ -49,6 +51,15 @@ namespace SurveyBackets.PL.Controler
             if (!result)
                 return NotFound();
             return Ok();
+        }
+
+        [HttpPatch("{id}/TogglePublish")]
+        public async Task<IActionResult> TogglePublishStatus(int id,CancellationToken cancellationToken)
+        {
+            var result =await _pollServices.TogglePublishStatusAsync(id,cancellationToken);
+            if (!result)
+                return NotFound();
+            return NoContent();
         }
     }
 }

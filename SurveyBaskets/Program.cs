@@ -1,5 +1,9 @@
 
 using MapsterMapper;
+using Microsoft.AspNetCore.Identity;
+using SurveyBaskets.BLL.Interface;
+using SurveyBaskets.BLL.Services;
+using SurveyBaskets.DAL.Entities;
 using SurveyBaskets.DAL.Persistence;
 using System.Reflection;
 
@@ -27,6 +31,11 @@ namespace SurveyBaskets
             var connection=builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddDbContext<ApplicationDBContext>(options=>options.UseSqlServer(connection));
             builder.Services.AddScoped<IPollServices, PollServices>();
+            builder.Services.AddScoped<IAuthServices, AuthServices>();
+
+            //authentication
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDBContext>();
 
             var app = builder.Build();
 

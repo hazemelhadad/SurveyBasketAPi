@@ -1,4 +1,4 @@
-﻿namespace SurveyBaskets.BLL.Contracts.Responses
+﻿namespace SurveyBaskets.BLL.Contracts.Polls
 {
     public record PollResponse
         (
@@ -9,5 +9,5 @@
         DateOnly StartsAt,
         DateOnly EndsAta
         );
-    
+
 }

@@ -54,6 +54,19 @@ namespace SurveyBackets.BLL.Services
                 return true;
             }
         }
+
+        public async Task<bool> TogglePublishStatusAsync(int id, CancellationToken cancellationToken = default)
+        {
+            
+            var result = await getByIdAsync(id, cancellationToken);
+            if (result is null)
+                return false;
+            
+            result.IsPublished=  !result.IsPublished;
+            await db.SaveChangesAsync(cancellationToken);
+            return true;
+
+        }
     }
 }
 

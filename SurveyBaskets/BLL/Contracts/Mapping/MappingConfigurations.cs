@@ -1,4 +1,6 @@
-﻿namespace SurveyBaskets.BLL.Contracts.Mapping
+﻿using SurveyBaskets.BLL.Contracts.Polls;
+
+namespace SurveyBaskets.BLL.Contracts.Mapping
 {
     public class MappingConfigurations : IRegister
     {
