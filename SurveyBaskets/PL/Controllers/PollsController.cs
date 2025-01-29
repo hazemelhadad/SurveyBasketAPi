@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Authorization;
 using SurveyBaskets.BLL.Contracts.Polls;
 
 namespace SurveyBackets.PL.Controler
@@ -10,6 +11,7 @@ namespace SurveyBackets.PL.Controler
     {
         private readonly IPollServices _pollServices = pollServices;
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             var poll = await _pollServices.GetAllAsync();

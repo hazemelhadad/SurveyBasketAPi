@@ -5,9 +5,10 @@ using SurveyBaskets.DAL.Entities;
 
 namespace SurveyBaskets.BLL.Services
 {
-    public class AuthServices(UserManager<ApplicationUser> _userManager) : IAuthServices
+    public class AuthServices(UserManager<ApplicationUser> _userManager,IJwtProvider jwtProvider) : IAuthServices
     {
         private readonly UserManager<ApplicationUser> userManager = _userManager;
+        private readonly IJwtProvider jwtProvider = jwtProvider;
 
         public async Task<AuthResponse?> GetTokenAsync(string email, string password, CancellationToken cancellationToken = default)
         {
@@ -23,10 +24,10 @@ namespace SurveyBaskets.BLL.Services
 
             //generate JWT Token
 
-
+            var (token, expiresIn) = jwtProvider.GenerateToken(user);
 
             //Return New Auth Response()
-            return new AuthResponse(user.Id,user.Email,user.FirstName,user.LastName, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",3600);
+            return new AuthResponse(user.Id,user.Email,user.FirstName,user.LastName,token,expiresIn);
 
         }
     }

@@ -3,6 +3,7 @@ using MapsterMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using SurveyBaskets.BLL.Authentication;
 using SurveyBaskets.BLL.Interface;
 using SurveyBaskets.BLL.Services;
 using SurveyBaskets.DAL.Entities;
@@ -39,7 +40,7 @@ namespace SurveyBaskets
             //authentication
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDBContext>();
-            builder.Services.AddSingleton<IJwtProvider,IJwtProvider>();
+            builder.Services.AddSingleton<IJwtProvider,JwtProvider>();
 
             // ????? ??? ?? ?? ??? ????? ?????? ????? ???? ???? ??? ????? ???????? 
             builder.Services.AddAuthentication(options =>
