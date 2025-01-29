@@ -1,11 +1,14 @@
 
 using MapsterMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 using SurveyBaskets.BLL.Interface;
 using SurveyBaskets.BLL.Services;
 using SurveyBaskets.DAL.Entities;
 using SurveyBaskets.DAL.Persistence;
 using System.Reflection;
+using System.Text;
 
 namespace SurveyBaskets
 {
@@ -36,6 +39,28 @@ namespace SurveyBaskets
             //authentication
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDBContext>();
+            builder.Services.AddSingleton<IJwtProvider,IJwtProvider>();
+
+            // ????? ??? ?? ?? ??? ????? ?????? ????? ???? ???? ??? ????? ???????? 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("tyffdKAInPGk2EgXx6G6l26BL7gdj1wO")),
+                        ValidIssuer = "SurveyBasket",
+                        ValidAudience = "Hazem"
+                    };
+                });
 
             var app = builder.Build();
 
