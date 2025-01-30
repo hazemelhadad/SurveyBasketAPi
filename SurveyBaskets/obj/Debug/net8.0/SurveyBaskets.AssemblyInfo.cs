@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SurveyBaskets")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+833536113c8d0b9d9cc8e2ced6b02a293c10532d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SurveyBaskets")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SurveyBaskets")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
