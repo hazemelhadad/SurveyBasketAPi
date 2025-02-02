@@ -1,7 +1,6 @@
 ﻿
 
-using Microsoft.AspNetCore.Authorization;
-using SurveyBaskets.BLL.Contracts.Polls;
+
 
 namespace SurveyBackets.PL.Controler
 {
